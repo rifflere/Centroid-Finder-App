@@ -1,0 +1,17 @@
+name: CI Pipeline
+
+on:
+    push: 
+        branches: [ main, dev ]
+    pull_request:
+        branches: [ main ]
+
+jobs:
+    sample-test:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Sample test
+              run: |
+                echo "This is a sample test."
+                echo "Sample test completed."
