@@ -3,11 +3,11 @@
 1. Fork and Clone the repository
 2. Install Dependencies
 ``` bash
-cd /frontend/
+cd frontend
 npm i
 ```
 ```bash
-cd /backend/server/
+cd backend/server
 npm i
 ```
 
