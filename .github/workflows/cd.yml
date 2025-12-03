@@ -45,7 +45,7 @@ jobs:
                     EOF
 
                     echo "Force ports free and docker close"
-                    kill $(lsof -t -i:3000 -i:3001)
+                    kill -9 $(lsof -t -i:3000 -i:3001)
                     docker ps -q --filter "publish=3000" --filter "publish=3001" | xargs -r docker stop
 
                     echo "Ensure docker is closed, then open Docker back end"
