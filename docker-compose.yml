@@ -1,7 +1,7 @@
 services:
   backend:
     image: ghcr.io/auglebobaugles/salamander:latest
-    container_name: backend
+    container_name: salamander-backend
     ports:
       - "3000:3000"
     volumes:
@@ -9,7 +9,7 @@ services:
       - "${OUTPUT_FILEPATH}:/results"
 
   frontend:
-    container_name: frontend
+    container_name: salamander-frontend
     build: ./frontend
     depends_on:
       - backend
