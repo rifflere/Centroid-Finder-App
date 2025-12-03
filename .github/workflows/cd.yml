@@ -45,6 +45,7 @@ jobs:
                     EOF
 
                     echo "Ensure docker is closed, then open Docker back end"
+                    kill -9 $(lsof -t -i:3000 -i:3001)
                     docker compose down
                     docker compose up --build
 
