@@ -7,6 +7,8 @@ import BinarizedFrameContainer from "./BinarizedFrameContainer";
 import { useContext, useState, useEffect } from 'react';
 import { SettingsContext } from "@/context/SettingsContext";
 
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
+
 export default function VideoPreview({filename}) {
     // get filename, thumbnail, and thumbnail setter from Settings Context
     const { setFilename, thumbnail, setThumbnail } = useContext(SettingsContext);
@@ -20,7 +22,7 @@ export default function VideoPreview({filename}) {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`http://localhost:3000/thumbnail/${filename}`);
+                const response = await fetch(`${API_BASE}/thumbnail/${filename}`);
                 
                 // Check if the response is OK
                 if (!response.ok) {

@@ -11,6 +11,8 @@ import { SettingsContext } from "@/context/SettingsContext";
 import CircularProgress from '@mui/material/CircularProgress';
 import { ControlPointSharp } from '@mui/icons-material';
 
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
+
 export default function VideoActions(){
 
     // get filename, color, and threshold states fron the Settings Context
@@ -26,15 +28,16 @@ export default function VideoActions(){
 
     // Handle the video processing button click
     const handleProcess = async () => {
+      
 
       // try catch
       try {
         // Logging the post request
-        console.log("Sending URL:", `http://localhost:3000/process/${filename}?targetColor=${encodedColor}&threshold=${encodedThreshold}`);
+        console.log("Sending URL:", `${API_BASE}/process/${filename}?targetColor=${encodedColor}&threshold=${encodedThreshold}`);
 
         // POST request to start processing (with filename, color, and threshold)
         const response = await fetch(
-            `http://localhost:3000/process/${filename}?targetColor=${encodedColor}&threshold=${encodedThreshold}`,
+            `${API_BASE}/process/${filename}?targetColor=${encodedColor}&threshold=${encodedThreshold}`,
             { method: 'POST' }
         );
 
@@ -63,7 +66,7 @@ export default function VideoActions(){
         const interval = setInterval(async () => {
           try {
             // Get the status of the processing job
-            const response = await fetch(`http://localhost:3000/process/${jobId}/status`);
+            const response = await fetch(`${API_BASE}/process/${jobId}/status`);
             const data = await response.json();
 
             if (data.status === 'done') {

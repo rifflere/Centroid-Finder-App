@@ -5,6 +5,8 @@ import { SettingsContext } from "@/context/SettingsContext";
 import { useParams } from 'next/navigation';
 import Papa from 'papaparse';
 
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
+
 export default function PreviewPage({ children, params }){
     const [csvData, setCsvData] = useState([]);
 
@@ -45,7 +47,7 @@ export default function PreviewPage({ children, params }){
             <Typography variant='body2' component='p'>{filename}</Typography>
 
             {/* Add a link to the csv file on the user's pc */}
-            <Button variant="contained" color="secondary" target="_blank" href={`http://localhost:3000/results/${csvFilename}.csv`} sx={{width: 1, my: 1}}>Download Results</Button>
+            <Button variant="contained" color="secondary" target="_blank" href={`${API_BASE}/results/${csvFilename}.csv`} sx={{width: 1, my: 1}}>Download Results</Button>
             
             <Button variant="outlined" color="secondary" href="/videos" sx={{width: 1, my: 1}}>Back to Videos</Button>
 

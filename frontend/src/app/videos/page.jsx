@@ -4,10 +4,9 @@ import { SettingsContext } from "@/context/SettingsContext";
 import { Button, List, ListItem, Typography, Box, Paper } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 
+const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
+
 export default function VideoChooserPage({children}){
-
-    const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
-
     // Get setFilename function from Settings Context
     const { setFilename } = useContext(SettingsContext);
     // Create myVideos state to hold an array of available videos
