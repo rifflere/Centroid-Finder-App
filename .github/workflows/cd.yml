@@ -45,10 +45,11 @@ jobs:
                     EOF
 
                     echo "Force docker close"
+                    docker container prune
                     docker ps -q --filter "publish=3000" --filter "publish=3001" | xargs -r docker stop
 
                     echo "Ensure docker is closed, then open Docker back end"
-                    docker compose down
+                    docker compose down --remove-orphans
                     docker compose up --build
 
                     echo "TODO: Run frontend"
