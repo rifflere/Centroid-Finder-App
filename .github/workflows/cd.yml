@@ -12,11 +12,6 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: Fake Deploy
-              run: |
-                    echo "Fake deploying..."
-                    echo "Fake deploy finished."
-            
             - name: Checkout code
               uses: actions/checkout@v3
 
