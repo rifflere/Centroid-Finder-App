@@ -6,8 +6,7 @@ import { useContext, useEffect, useState } from 'react';
 
 export default function VideoChooserPage({children}){
 
-    // Temporary Data until we get an api route to paste here or whatever we use to retrieve data from Docker
-    // const sampleVideoData = ['video1.mp4', 'video2.mp4', 'video3.mp4'];
+    const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
 
     // Get setFilename function from Settings Context
     const { setFilename } = useContext(SettingsContext);
@@ -19,7 +18,7 @@ export default function VideoChooserPage({children}){
         // fetch call to get list of all available videos
         const fetchData = async () => {
         try {
-            const response = await fetch('http://localhost:3000/api/videos');
+            const response = await fetch(`${API_BASE}/api/videos`);
             const data = await response.json();
             console.log(data);
 
