@@ -50,7 +50,6 @@ jobs:
 
                     echo "Ensure docker is closed, then open Docker back end"
                     docker compose down --remove-orphans
-                    docker compose up --build
+                    docker compose up --build -d
 
-                    echo "TODO: Run frontend"
                     echo "Done!"
