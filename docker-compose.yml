@@ -1,7 +1,18 @@
 services:
+  backend:
+    image: ghcr.io/auglebobaugles/salamander:latest
+    container_name: backend
+    ports:
+      - "3000:3000"
+    volumes:
+      - "${INPUT_FILEPATH}:/videos"
+      - "${OUTPUT_FILEPATH}:/results"
+
   frontend:
     container_name: frontend
     build: ./frontend
+    depends_on:
+      - backend
     ports:
       - "3001:3001"   # host:container
     environment:
