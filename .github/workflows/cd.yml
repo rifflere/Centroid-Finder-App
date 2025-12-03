@@ -51,9 +51,7 @@ jobs:
 
                     echo "Ensure docker is closed, then open Docker back end"
                     docker compose down
-                    cd backend
-
-                    docker run -p 3000:3000 -v "/home/Centroid-Finder-App/Centroid-Finder-App/backend/processor/sampleInput:/videos" -v "/home/Centroid-Finder-App/Centroid-Finder-App/backend/processor/sampleOutput:/results" ghcr.io/auglebobaugles/salamander:latest
+                    docker compose up --build
 
                     echo "TODO: Run frontend"
                     echo "Done!"
