@@ -16,3 +16,38 @@ jobs:
               run: |
                     echo "Fake deploying..."
                     echo "Fake deploy finished."
+            
+            - name: Checkout code
+              uses: actions/checkout@v3
+
+            - name: Deploy to VM
+              uses: appleboy/ssh-action@v1.0.0
+              with:
+                host: ${{ secrets.VM_HOST }}
+                username: ${{ secrets.VM_USERNAME }}
+                password: ${{ secrets.VM_PASSWORD }}
+                script: |
+                    set -xe
+                    echo "Ensure /home/Centroid-Finder-App exists"
+                    cd /home/Centroid-Finder-App || { mkdir -p /home/Centroid-Finder-App && cd /home/Centroid-Finder-App; }
+
+                    echo "Pull or clone repo"
+                    if [ -d "Centroid-Finder-App/.git" ]; then
+                      echo "Repo exists, pulling latest"
+                      cd Centroid-Finder-App
+                      git pull origin main
+                    else
+                      echo "Repo does not exist, cloning"
+                      rm -rf Centroid-Finder-App 
+                      git clone https://github.com/rifflere/Centroid-Finder-App.git
+                      cd Centroid-Finder-App
+                    fi
+
+                    echo "Ensure docker is closed, then open Docker back end"
+                    docker compose down
+                    cd backend
+
+                    docker run -p 3000:3000 -v "/home/Centroid-Finder-App/Centroid-Finder-App/backend/processor/sampleInput:/videos" -v "/home/Centroid-Finder-App/Centroid-Finder-App/backend/processor/sampleOutput:/results" ghcr.io/auglebobaugles/salamander:latest
+
+                    echo "TODO: Run frontend"
+                    echo "Done!"
