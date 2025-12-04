@@ -42,7 +42,7 @@ jobs:
                     cat > .env <<EOF
                     INPUT_FILEPATH="/home/Centroid-Finder-App/Centroid-Finder-App/backend/processor/sampleInput"
                     OUTPUT_FILEPATH="/home/Centroid-Finder-App/Centroid-Finder-App/backend/processor/sampleOutput"
-                    NEXT_PUBLIC_API_BASE_URL="${{ secrets.VM_HOST }}"
+                    NEXT_PUBLIC_API_BASE_URL="${{ secrets.VM_HOST }}:3000"
                     EOF
 
                     echo "Force docker close"
