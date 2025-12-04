@@ -42,7 +42,7 @@ jobs:
                     cat > .env <<EOF
                     INPUT_FILEPATH="/home/Centroid-Finder-App/Centroid-Finder-App/backend/processor/sampleInput"
                     OUTPUT_FILEPATH="/home/Centroid-Finder-App/Centroid-Finder-App/backend/processor/sampleOutput"
-                    NEXT_PUBLIC_API_BASE_URL="${{ secrets.VM_HOST }}:3000"
+                    NEXT_PUBLIC_API_BASE_URL="http://${{ secrets.VM_HOST }}:3000"
                     EOF
 
                     echo "Force docker close"
@@ -51,6 +51,7 @@ jobs:
 
                     echo "Ensure docker is closed, then open Docker back end"
                     docker compose down --remove-orphans
-                    docker compose up --build -d
+                    docker compose build --no-cache frontend
+                    docker compose up -d
 
                     echo "Done!"
